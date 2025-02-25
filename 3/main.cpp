@@ -3,8 +3,8 @@
 #include <algorithm>
 
 int main() {
-  std::vector<int> numbers{};
-  int input_number {};
+  std::vector<double> numbers{};
+  double input_number {};
   while (std::cin >> input_number) {
     numbers.push_back(input_number);
     if (std::size(numbers) == 2) {
