@@ -14,6 +14,8 @@ int main() {
       } else { 
         std::cout << "the smaller value is: " << numbers[0] << '\n';
         std::cout << "the larger value is: " << numbers[1] << '\n';
+        if (numbers[1] - numbers[0] < 0.01)
+          std::cout << "the numbers are almost equal\n";
       }
     }
   }
