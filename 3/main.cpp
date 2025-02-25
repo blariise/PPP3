@@ -9,8 +9,12 @@ int main() {
     numbers.push_back(input_number);
     if (std::size(numbers) == 2) {
       std::ranges::sort(numbers);
-      std::cout << "the smaller value is: " << numbers[0] << '\n';
-      std::cout << "the larger value is: " << numbers[1] << '\n';
+      if (numbers[0] == numbers[1]) {
+        std::cout << "the numbers are equal\n";
+      } else { 
+        std::cout << "the smaller value is: " << numbers[0] << '\n';
+        std::cout << "the larger value is: " << numbers[1] << '\n';
+      }
     }
   }
   return 0;
