@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 int main() {
   std::vector<double> numbers{};
@@ -26,6 +27,7 @@ int main() {
 
     ++count_numbers;
     sum_numbers += converted_value;
+    numbers.push_back(converted_value);
     if (is_first_iter) {
       smallest = converted_value;
       largest = converted_value;
@@ -45,5 +47,10 @@ int main() {
   std::cout << "largest number(m): " << largest << '\n';
   std::cout << "numbers count: " << count_numbers << '\n';
   std::cout << "sum of numbers(m): " << sum_numbers << '\n';
+  std::ranges::sort(numbers);
+  for (const auto& num : numbers) {
+    std::cout << num << ' ';
+  }
+  std::cout << '\n';
   return 0;
 }
