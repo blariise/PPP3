@@ -1,21 +1,25 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 int main() {
   std::vector<double> numbers{};
   double input_number {};
+  double largest {};
+  double smallest {};
+  bool is_first_iter { true };
   while (std::cin >> input_number) {
-    numbers.push_back(input_number);
-    if (std::size(numbers) == 2) {
-      std::ranges::sort(numbers);
-      if (numbers[0] == numbers[1]) {
-        std::cout << "the numbers are equal\n";
-      } else { 
-        std::cout << "the smaller value is: " << numbers[0] << '\n';
-        std::cout << "the larger value is: " << numbers[1] << '\n';
-        if (numbers[1] - numbers[0] < 0.01)
-          std::cout << "the numbers are almost equal\n";
+    if (is_first_iter) {
+      smallest = input_number;
+      largest = input_number;
+      is_first_iter = false;
+      continue;
+    } else {
+      if (input_number < smallest) {
+        smallest = input_number;
+        std::cout << "the smallest so far\n";
+      } else if  (input_number > largest) {
+        largest = input_number;
+        std::cout << "the largest so far\n";
       }
     }
   }
