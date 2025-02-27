@@ -6,8 +6,7 @@ int main() {
                                          "two", "three", 
                                          "four", "five", 
                                          "six", "seven", 
-                                         "eight", "nine", 
-                                         "ten" };
+                                         "eight", "nine"};
   int num {};
   std::cin >> num;
   std::cout << digit_words[num] << '\n';
