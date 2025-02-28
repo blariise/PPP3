@@ -1,6 +1,21 @@
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 #include <algorithm>
+
+double findMode(const std::vector<double>& v) {
+  std::unordered_map<double, int> map_v {};
+  int max { 0 };
+  double mode {};
+  for (const auto num : v) {
+    map_v[num]++;
+    if (map_v[num] > max) {
+      max = map_v[num];
+      mode = num;
+    }
+  }
+  return mode;
+}
 
 int main() {
   std::vector<double> numbers{};
@@ -51,6 +66,9 @@ int main() {
   for (const auto& num : numbers) {
     std::cout << num << ' ';
   }
+
   std::cout << '\n';
+  std::cout << "mode: " << findMode(numbers) << '\n';
+
   return 0;
 }
