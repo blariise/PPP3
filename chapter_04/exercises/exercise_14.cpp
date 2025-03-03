@@ -1,7 +1,7 @@
 #include "../../PPPheaders.h"
 
 int main() {
-  std::vector<std::string> legal_names {
+  vector<string> legal_names {
   "Mon",
   "mon",
   "monday",
@@ -36,17 +36,23 @@ int main() {
   "sun"
   };
   
-  std::vector<int> values {};
+  int sum { 0 };
 
-  std::string day {};
+  int illegal_days { 0 };
+  string day {};
   int value {};
+  bool is_legal { false };
   while(std::cin >> day >> value) {
     for (const auto& name : legal_names) {
       if (name == day) {
+        is_legal = true;
+        sum += value;
       }
     }
+    if (!is_legal)
+      ++illegal_days;
   }
 
-
+  std::cout << "Rejected values: " << illegal_days << '\n';
   return 0;
 }

@@ -19,7 +19,6 @@
 #define PPP_EXPORT
 #include "PPP_support.h"
 
-using namespace std;
 using namespace PPP;
 
 
