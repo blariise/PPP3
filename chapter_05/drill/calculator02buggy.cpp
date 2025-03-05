@@ -76,6 +76,7 @@ Token Token_stream::get()
     switch (ch) {
     case '=':    // for "print"
     case 'x':    // for "quit"
+    case '{': case '}': case '!':
     case '(': case ')': case '+': case '-': case '*': case '/':
         return Token(ch);        // let each character represent itself
     case '.':
@@ -102,6 +103,12 @@ Token_stream ts;        // provides get() and putback()
 double expression();    // declaration so that primary() can call expression()
 
 //------------------------------------------------------------------------------
+int factorial(int n) {
+
+  if (n == 0 || n == 1)
+    return 1;
+  return n * factorial(n -1);
+}
 
 // deal with numbers and parentheses
 double primary()
@@ -116,8 +123,25 @@ double primary()
           error("')' expected");
         return d;
     }
-    case '8':            // we use '8' to represent a number
-        return t.value;  // return the number's value
+    case '{': {
+      double d = expression();
+      t = ts.get();
+      if (t.kind != '}')
+        error("'}' expected");
+      return d;
+    }
+
+    case '8': {            // we use '8' to represent a number
+      double d { t.value };
+      Token t2 = ts.get();
+      if (t2.kind == '!') {
+        if (d < 0 || d!= int(d))
+          error("Factorial only works for non-negative integers");
+        return factorial(int(d));
+      }
+      ts.putback(t2);
+      return d;  // return the number's value
+    }
     default:
         error("primary expected");
     }
@@ -172,6 +196,7 @@ double expression()
             left -= term();    // evaluate Term and subtract
             t = ts.get();
             break;
+        
         default:
             ts.putback(t);     // put t back into the token stream
             return left;       // finally: no more + or -: return the answer
